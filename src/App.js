@@ -99,7 +99,7 @@ class App extends Component {
     return (
       <div className="App">
         <Logo src={d20} alt="" className={this.state.spin}/>
-        <Title>Ability Score Roller</Title>
+        <Title>Roll your ability scores!</Title>
         <Button onClick={this.rollStats}>Roll!</Button>
         <Results>
           {this.renderStats()}
