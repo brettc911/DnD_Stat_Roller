@@ -3,22 +3,73 @@
   margin: 0 auto;
 }
 
-.spin {
-  animation-name: spin;
-  animation-duration: 400ms;
-  animation-iteration-count: 1;
-  animation-timing-function: linear;
-}
-
-.nospin {
-
-}
-
 @keyframes spin {
     from {
         transform:rotate(0deg);
     }
+
     to {
-        transform:rotate(360deg);
+        transform:rotate(720deg);
     }
 }
+
+.spin {
+  animation-name: spin;
+  animation-iteration-count: 1;
+  animation-duration: 4000ms;
+}
+
+@keyframes flipInX {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -30deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 20deg);
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+    opacity: 1;
+  }
+}
+
+.noshow {
+  opacity: 0
+}
+
+.show {
+  opacity: 1;
+}
+
+.flipInTitle {
+  animation-name: flipInX;
+  animation-duration: 3000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+.flipInX {
+  animation-name: flipInX;
+  animation-duration: 3000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+.flipInX:nth-child(1) { animation-delay: 1ms }
+.flipInX:nth-child(2) { animation-delay: 200ms }
+.flipInX:nth-child(3) { animation-delay: 400ms }
+.flipInX:nth-child(4) { animation-delay: 600ms }
+.flipInX:nth-child(5) { animation-delay: 800ms }
+.flipInX:nth-child(6) { animation-delay: 1000ms }

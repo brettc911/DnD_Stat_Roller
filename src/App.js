@@ -8,6 +8,7 @@ const Logo = styled.img`
   display: block;
   margin: 0 auto;
   margin-top: 150px;
+  cursor: pointer;
 `
 
 const Title = styled.h1`
@@ -24,16 +25,16 @@ const Button = styled.button`
   margin-top: 50px;
   background: none;
   outline: none;
+  background: #303030;
   padding: 10px 20px;
   color: #fff;
-  background: #C3A379;
   border: solid 2px #fff;
   border-radius: 7px;
   &:hover{
     cursor: pointer;
   }
   &:active{
-    background: #303030;
+    background: #C3A379;
   }
 `
 
@@ -43,26 +44,34 @@ const Results = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
+  min-width: 314px;
+  max-width: 50%;
 `
 const Number = styled.div`
   font-family: 'Berkshire Swash', cursive;
   color: #fff;
-  font-size: 40px;
+  font-size: 32px;
 `
 class App extends Component {
   constructor(){
     super()
     this.state = {
       results: [],
-      spin: 'nospin'
+      spin: '',
+      flip: '',
+      show: 'noshow',
     }
   }
 
   rollStats = () => {
-
+    this.setState({ show: 'noshow'})
     this.setState({ spin: 'spin'})
-    setTimeout(() => this.setState({ spin: 'nospin'}), 400)
+    this.setState({ flip: 'flipInX'})
+    setTimeout(()=> this.setState({ show: 'show'}), 1000)
+    setTimeout(() => {
+      this.setState({ spin: ''})
+      this.setState({ flip: ''})
+    }, 4000)
 
 
 
@@ -90,7 +99,7 @@ class App extends Component {
   renderStats = () => {
     let stats = this.state.results.map((number, i) => {
       return (
-        <Number>{number}</Number>
+        <Number className={`${this.state.flip} ${this.state.show}`}>{number}</Number>
       )
     })
     return stats
@@ -99,8 +108,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Logo src={d20} alt="" className={this.state.spin}/>
-        <Title>Roll your ability scores!</Title>
+        <Logo src={d20} alt="" className={this.state.spin} onClick={this.rollStats}/>
+        <Title className='flipInTitle'>Roll your ability scores!</Title>
         <Button onClick={this.rollStats}>Roll!</Button>
         <Results>
           {this.renderStats()}
